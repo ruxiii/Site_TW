@@ -1,0 +1,251 @@
+html{
+    --margine-main:0px;
+    --inaltime-buton:2.5em;
+    --dim-text:17px;
+    font-size:var(--dim-text);
+}
+
+body{
+    --backgr-pagina:rgba(199,229,235);
+    --culoare-buton:rgba(250,227,217,1);
+    --culoare-buton-selectat:rgba(255,182,185,1);
+    --culoare-border: #000000;
+    --mod-afisare-pagina:grid;
+    --culoare-nav:rgba(138,198,209,1);
+    --inaltime-meniu:30px;
+    background-color: var(--backgr-pagina);
+    padding: 40px;
+}
+
+main{
+    background-color: rgb(199, 229, 235);
+    margin-left:var(--margine-main);
+    margin-right:var(--margine-main);
+}
+
+section{
+    border:1px solid rgb(0, 0, 0);
+    padding: 50px;
+}
+
+#container{
+    display: grid;
+    grid-template-areas: "z-Acasa z-Acasa"
+                        "z-Tabel z-Tabel"
+                        "z-Planifica_o_vacanta z-Planifica_o_vacanta"
+                        "z-Detalii z-Poza"
+                        "z-Contul_meu z-Contul_meu"
+                        "z-Recomandari z-Simulator";
+    grid-template-columns: 1fr 1fr;
+}
+
+#Detalii{
+    grid-area: z-Detalii;
+}
+
+
+
+#Poza{
+    grid-area: z-Poza;
+}
+
+#Acasa{
+    grid-area: z-Acasa;
+}
+
+#Tabel{
+    grid-area: z-Tabel;
+}
+
+#Planifica_o_vacanta{
+    grid-area: z-Planifica_o_vacanta;
+}
+
+iframe, img{
+    width:80%;
+}
+
+
+#Contul_meu{
+    grid-area: z-Contul_meu;
+}
+
+#Recomandari{
+    grid-area: z-Recomandari;
+}
+
+#Simulator{
+    grid-area: z-Simulator;
+}
+
+/***************meniu*************/
+
+ul.meniu{
+    display: flex;
+}
+
+header{
+    margin-left:var(--margine-main);
+    margin-right:var(--margine-main);
+}
+
+nav{
+    background-color: var(--culoare-nav);
+}
+
+nav ul{
+    padding:0;
+    margin:0;
+}
+
+ul.meniu li{
+    list-style-type:none;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    height:var(--inaltime-meniu);
+
+    background-color: var(--culoare-nav);
+    height:20px;
+    width: 500px;
+    overflow: hidden;
+    text-align: center;
+    padding:0;
+}
+
+ul.meniu li:hover{
+    overflow: visible;
+    text-shadow: 0px 0px 5px rgb(211, 151, 231);
+}
+
+ul.meniu, ul.submeniu{
+    padding:0;
+    margin:0;
+}
+
+ul.submeniu{
+    z-index:10;
+    position: relative;
+    left:-2px;
+}
+
+ul.meniu li ul li a{
+    color: rgb(155, 53, 189);
+}
+
+ul.meniu ul.submeniu li{
+   background-color:rgba(250,227,217,1);
+}
+
+ul.meniu li a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-shadow: 0px 0px 5px rgb(155, 53, 189);
+    transition: all 0.5s linear, box-shadow 0.5s linear;
+}
+
+ul.meniu li a:hover{
+    background-color: rgb(235, 178, 225);
+}
+
+#chk-meniu, #img_meniu{
+    display: none;
+}
+
+#container{
+    counter-reset: nrsectiune; /*default 0*/
+}
+
+#container h2::before{
+    counter-increment: nrsectiune;
+    content:counter(nrsectiune) ".";
+    display: inline-block;
+    background-color:rgba(250,227,217,1);
+    border-radius: 10px ;
+    padding: 5px;
+}
+
+@media screen and (max-width:1000px){
+    ul.meniu{
+        display: none;
+        position: relative;
+        animation: animatie_meniu 0.7s linear 1;
+    }
+
+    ul.meniu li{
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #chk-meniu:checked~ul.meniu{
+        display: block;
+    }
+
+    ul.meniu ul{
+        position: absolute;
+        z-index:100;
+        width: 100%;
+    }
+
+    ul.meniu ul li{
+        background-color: rgba(138,198,209,1);
+    }
+
+    #img_meniu{
+        height: var(--inaltime-meniu);
+        width:auto;
+        display: inline-block;
+    }
+
+    #container{
+        grid-template-areas: "z-Acasa"
+                            "z-Tabel"
+                            "z-Planifica_o_vacanta"
+                            "z-Detalii"
+                            "z-Poza"
+                            "z-Contul_meu"
+                            "z-Recomandari"
+                            "z-Simulator";
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes animatie_meniu{
+    0%{
+        transform: scaleX(0);
+        opacity: 0;
+        background-color: transparent;
+    }
+    50%{
+        opacity: 0.1 
+    }
+    75%{
+        opacity: 0.3
+    }
+    100%{
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* stilizare tabel */
+
+th,td{
+	border:1px solid black;
+	padding:5px;
+}
+th{
+	text-transform: capitalize;
+}
+table{
+	border-collapse:collapse;
+	empty-cells:show;
+	margin:0 auto;
+}
